@@ -99,8 +99,8 @@ int main(int argc, char *argv[]){
             cv::Mat facepng = cv::imread(facestring, cv::IMREAD_UNCHANGED);
             cv::Mat output;
             overlayImages(basepng, facepng, output, x, y);
-            printf("saving...   %d_%d.png\n", base[i].asInt(),face[j].asInt());
             imwrite(outputname, output);
+            printf("saving...   %d_%d.png\n", base[i].asInt(),face[j].asInt());
         }
     }
 
