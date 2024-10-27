@@ -21,3 +21,10 @@ kfc ヤエカＡ_0.json #改成你要合成的立绘的配置文件
     "face": [4154, 4176, 4191, 4216, 4241, 4266, 4339, 4371, 4403, 4428]
 }
 ```
+
+
+# 编译
+
+```shell
+g++ kfc.cpp -o kfc.exe $(pkg-config --cflags --libs opencv jsoncpp)
+```
