@@ -22,17 +22,13 @@ int getypos(kif base,kif face){
 int main(int argc, char *argv[]){
 
     //读取json文件
-    std::ifstream jsonfile(argv[1], std::ifstream::binary);
+    Json::Value root = convertToJson(argv[1]);
     std::ifstream cfjsonfile("kfc_config.json", std::ifstream::binary);
-    Json::Value root, cfroot;
-    Json::CharReaderBuilder readerBuilder, cfreaderBuilder;
-    std::string errs, cferrs;
+    Json::Value cfroot;
+    Json::CharReaderBuilder cfreaderBuilder;
+    std::string cferrs;
 
     //解析json文件
-    if (!Json::parseFromStream(readerBuilder, jsonfile, &root, &errs)) {
-        std::cerr << "parse fail!" << errs << std::endl;
-        return 1;
-    }
     if (!Json::parseFromStream(cfreaderBuilder, cfjsonfile, &cfroot, &cferrs)) {
         std::cerr << "parse fail!" << cferrs << std::endl;
         return 1;
