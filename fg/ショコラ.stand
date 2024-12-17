@@ -1,0 +1,28 @@
+[%[
+ "facexoff"=>-1,
+ "faceyoff"=>-38,
+ "facezoom"=>90,
+ "filename"=>"ショコラＡ",
+ "leveloffset"=>[[0,45],[0,0],[0,-70],[0,-140],[0,-234]],
+ "name"=>"ポーズ１",
+ "xoffset"=>0,
+ "yoffset"=>345
+],%[
+ "facexoff"=>-15,
+ "faceyoff"=>-33,
+ "facezoom"=>90,
+ "filename"=>"ショコラＢ",
+ "leveloffset"=>[[0,45],[0,0],[0,-55],[0,-140],[0,-230]],
+ "name"=>"ポーズ２",
+ "xoffset"=>0,
+ "yoffset"=>343
+],%[
+ "facexoff"=>-4,
+ "faceyoff"=>-40,
+ "facezoom"=>90,
+ "filename"=>"ショコラＣ",
+ "leveloffset"=>[[0,45],[0,0],[0,-55],[0,-140],[0,-230]],
+ "name"=>"ポーズ３",
+ "xoffset"=>0,
+ "yoffset"=>343
+],void]

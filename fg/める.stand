@@ -1,0 +1,28 @@
+[%[
+ "facexoff"=>-4,
+ "faceyoff"=>-22,
+ "facezoom"=>90,
+ "filename"=>"めるＡ",
+ "leveloffset"=>[[0,45],[0,0],[0,-60],[0,-140],[0,-234]],
+ "name"=>"ポーズ１",
+ "xoffset"=>0,
+ "yoffset"=>340
+],%[
+ "facexoff"=>-11,
+ "faceyoff"=>-27,
+ "facezoom"=>90,
+ "filename"=>"めるＢ",
+ "leveloffset"=>[[0,45],[0,0],[5,-52],[0,-140],[0,-230]],
+ "name"=>"ポーズ２",
+ "xoffset"=>0,
+ "yoffset"=>340
+],%[
+ "facexoff"=>-5,
+ "faceyoff"=>-33,
+ "facezoom"=>90,
+ "filename"=>"めるＣ",
+ "leveloffset"=>[[0,44],[0,0],[0,-55],[0,-140],[0,-230]],
+ "name"=>"ポーズ３",
+ "xoffset"=>0,
+ "yoffset"=>340
+],void]

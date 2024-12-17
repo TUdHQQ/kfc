@@ -1,0 +1,29 @@
+#ショコラＣ（後ろ）				
+#dress	服装名	種別	差分名	レイヤ名
+dress	カフェ制服	base	dummy	
+dress	カフェ制服	diff	後ろ１	カフェ制服/後ろ１
+
+dress	制服	base	dummy	
+dress	制服	diff	後ろ１	制服/後ろ１
+
+dress	私服	base	dummy	
+dress	私服	diff	後ろ１	私服/後ろ１
+
+dress	私服外	base	dummy	
+dress	私服外	diff	後ろ１	私服外/後ろ１
+
+dress	裸	base	dummy	
+dress	裸	diff	後ろ１	裸/後ろ１
+
+
+# 表情グループの指定（眉は目の一部として処理）				
+#facegroup	表情名先頭部			
+facegroup	眉_			
+facegroup	目_			
+facegroup	口_			
+facegroup	汗_			
+facegroup	頬_			
+
+
+# 表情グループ定義名				
+#fgname	表情名	レイヤ名	フラグ	
