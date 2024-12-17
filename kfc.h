@@ -261,16 +261,9 @@ inline std::vector<kif> sortImgById(const std::vector<kif>& img,const int& id,co
 
 inline kif getItem(const std::vector<kif>& item,const std::string name){
     kif temp;
-    bool found = false;
+    const std::string cmp = name;
     for(int i = 0; i < item.size(); i++){
-        if(item[i].name == name) {
-            temp = item[i];
-            found = true;
-            break; 
-        }
-    }
-    if(!found) {
-        std::cerr << "Warning: Item '" << name << "' not found" << std::endl;
+        if(item[i].name == cmp) temp = item[i];
     }
     return temp;
 }
@@ -301,28 +294,33 @@ inline std::string getPath(const std::string& perfix,const kif& item){
     return perfix + "_" + std::to_string(item.layer_id)+ ".png";
 }
 
-inline void work(const kif& base,const kif& eye,const kif& eyebrow,const kif& mouth,const std::string name,const std::string perfix){
+inline void work(const kif& base,const kif& eye,const kif& eyebrow,const kif& mouth,const kif& cheek,const std::string name,const std::string perfix){
     let basepath = getPath(perfix, base);
     let eyepath = getPath(perfix, eye);
     let eyebrowpath = getPath(perfix, eyebrow);
     let mouthpath = getPath(perfix, mouth);
+    let cheekpath = getPath(perfix, cheek);
     let eyex = getxpos(base, eye);
     let eyey = getypos(base, eye);
     let eyebrowx = getxpos(base, eyebrow);
     let eyebrowy = getypos(base, eyebrow);
     let mouthx = getxpos(base, mouth);
     let mouthy = getypos(base, mouth);
+    let cheekx = getxpos(base, cheek);
+    let cheeky = getypos(base, cheek);
 
     let baseimg = cv::imread(basepath, cv::IMREAD_UNCHANGED);
     let eyeimg = cv::imread(eyepath, cv::IMREAD_UNCHANGED);
     let eyebrowimg = cv::imread(eyebrowpath, cv::IMREAD_UNCHANGED);
     let mouthimg = cv::imread(mouthpath, cv::IMREAD_UNCHANGED);
+    let cheekimg = cv::imread(cheekpath, cv::IMREAD_UNCHANGED);
 
     auto output = baseimg.clone();
 
     overlayImages(baseimg, eyeimg,output, eyex, eyey);
     overlayImages(output, eyebrowimg,output, eyebrowx, eyebrowy);
     overlayImages(output, mouthimg,output, mouthx, mouthy);
+    overlayImages(output, cheekimg,output, cheekx, cheeky);
 
     fs::path outputpath = fs::path("output") / fs::path(perfix + "_" + name + "_"+ base.name + ".png");
     cv::imwrite(outputpath.string(), output);

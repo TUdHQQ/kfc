@@ -41,10 +41,8 @@ int main(int argc, char *argv[]){
             let eyebox = getItem(eye, alias.eye);
             let eyebrowbox = getItem(eyebrow, alias.eyebrow);
             let mouthbox = getItem(mouth, alias.mouth);
-            //std::cout<<alias.eye<<" "<<alias.eyebrow<<" "<<alias.mouth<<std::endl;
-            //std::cout<<eyebox.name<<" "<<eyebrowbox.name<<" "<<mouthbox.name<<std::endl;
-            //std::cout<<"--------------------------------"<<std::endl;
-            work(base[i], eyebox, eyebrowbox, mouthbox, alias.name,perfix);
+            let cheekbox = getItem(cheek, alias.cheek);
+            work(base[i], eyebox, eyebrowbox, mouthbox, cheekbox, alias.name, perfix);
         }
     }
 
