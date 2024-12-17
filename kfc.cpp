@@ -1,43 +1,19 @@
 #include "kfc.h"
 
-namespace fs = std::filesystem;
-
-//用来查找 layer_id
-int findkif(std::vector<kif> img, int find_layer_id){
-    for(int i = 0; i < img.size(); i++){
-        if(img[i].is_layer_id(find_layer_id)) return i;
-    }
-    return -1;
-}
-
-//用来确定x和y
-int getxpos(kif base,kif face){
-    return abs(base.left - face.left);
-}
-int getypos(kif base,kif face){
-    return abs(base.top - face.top);
-}
-
-
 int main(int argc, char *argv[]){
 
     //读取json文件
     Json::Value root = convertToJson(argv[1]);
-    std::ifstream cfjsonfile("kfc_config.json", std::ifstream::binary);
-    Json::Value cfroot;
-    Json::CharReaderBuilder cfreaderBuilder;
-    std::string cferrs;
-
-    //解析json文件
-    if (!Json::parseFromStream(cfreaderBuilder, cfjsonfile, &cfroot, &cferrs)) {
-        std::cerr << "parse fail!" << cferrs << std::endl;
-        return 1;
-    }
-
+    Json::Value cfroot = readJsonFromFile("kfc_config.json");
+    
     //读取第一个对象里面的 width 和 height
-    int krkr_width = root[0]["width"].asInt();
-    int krkr_height = root[0]["height"].asInt();
+    //int krkr_width = root[0]["width"].asInt();
+    //int krkr_height = root[0]["height"].asInt();
+    //没啥用，删掉了
 
+    
+
+    /*
     //创建一个kif类型的vector用来存储后面的对象
     std::vector<kif> img;
 
@@ -101,6 +77,7 @@ int main(int argc, char *argv[]){
             printf("saving...   %d_%d.png\n", base[i].asInt(),face[j].asInt());
         }
     }
+    */
 
     return 0;
 

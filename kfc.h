@@ -5,6 +5,8 @@
 #include <opencv2/opencv.hpp>
 #include <filesystem>
 
+namespace fs = std::filesystem;
+
 //KIF: Krkr Image File
 //创建一种结构体，用来存储每一个图片文件的详细数据
 struct kif{
@@ -19,7 +21,7 @@ struct kif{
 
 
 //来源: listder.h
-void overlayImages(const cv::Mat &background, const cv::Mat &foreground, cv::Mat &output, int x, int y) {
+inline void overlayImages(const cv::Mat &background, const cv::Mat &foreground, cv::Mat &output, int x, int y) {
     cv::Rect roi(x, y, std::min(foreground.cols, background.cols - x), 
     std::min(foreground.rows, background.rows - y));
     
@@ -54,7 +56,8 @@ void overlayImages(const cv::Mat &background, const cv::Mat &foreground, cv::Mat
     }
 }
 
-std::vector<std::string> split(const std::string& str, char delim) {
+//用于将txt格式转换为json
+inline std::vector<std::string> split(const std::string& str, char delim) {
     std::vector<std::string> tokens;
     std::stringstream ss(str);
     std::string token;
@@ -63,8 +66,7 @@ std::vector<std::string> split(const std::string& str, char delim) {
     }
     return tokens;
 }
-
-Json::Value convertToJson(const std::string& filename) {
+inline Json::Value convertToJson(const std::string& filename) {
     std::ifstream file(filename);
     std::string line;
     Json::Value root(Json::arrayValue);
@@ -108,4 +110,51 @@ Json::Value convertToJson(const std::string& filename) {
     }
 
     return root;
+}
+
+
+//用来读取json文件
+inline Json::Value readJson(const std::string &file) {
+    std::ifstream jsonfile(file, std::ifstream::binary);
+    Json::Value root;
+    Json::CharReaderBuilder readerBuilder;
+    std::string errs;
+
+    if (!Json::parseFromStream(readerBuilder, jsonfile, &root, &errs)) {
+        throw std::runtime_error("Failed to parse JSON file: " + file + ", error: " + errs);
+    }
+
+    return root;
+}
+
+//用来查找 layer_id
+inline int findkif(std::vector<kif> img, int find_layer_id){
+    for(int i = 0; i < img.size(); i++){
+        if(img[i].is_layer_id(find_layer_id)) return i;
+    }
+    return -1;
+}
+
+//用来确定x和y
+inline int getxpos(kif base,kif face){
+    return abs(base.left - face.left);
+}
+inline int getypos(kif base,kif face){
+    return abs(base.top - face.top);
+}
+
+//读取配置文件
+inline Json::Value readJsonFromFile(const std::string &file){
+
+    Json::Value root;
+    fs::path filepath = fs::path(file);
+    if(filepath.extension().compare(".txt") == 0){
+        root = convertToJson(file);
+    }
+    else{
+        root = readJson(file);
+    }
+    
+    return root;
+
 }
