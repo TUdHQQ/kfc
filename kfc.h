@@ -324,4 +324,5 @@ inline void work(const kif& base,const kif& eye,const kif& eyebrow,const kif& mo
 
     fs::path outputpath = fs::path("output") / fs::path(perfix + "_" + name + "_"+ base.name + ".png");
     cv::imwrite(outputpath.string(), output);
+    std::cout<<"saving..... "<<outputpath<<std::endl;
 }
