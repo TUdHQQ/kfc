@@ -1,5 +1,7 @@
 #include "kfc.h"
 
+namespace fs = std::filesystem;
+
 //用来查找 layer_id
 int findkif(std::vector<kif> img, int find_layer_id){
     for(int i = 0; i < img.size(); i++){
@@ -76,7 +78,7 @@ int main(int argc, char *argv[]){
 
     //创建output文件夹
     std::string outputpath = "output";
-    _mkdir(outputpath.c_str());
+    fs::create_directory(outputpath);
 
     //遍历配置文件中的base和face数组
     for(int i = 0; i < base.size(); i++){

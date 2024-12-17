@@ -3,8 +3,7 @@
 #include <fstream>
 #include <json/json.h>
 #include <opencv2/opencv.hpp>
-#include <io.h>
-#include <direct.h>
+#include <filesystem>
 
 //KIF: Krkr Image File
 //创建一种结构体，用来存储每一个图片文件的详细数据
