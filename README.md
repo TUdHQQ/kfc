@@ -12,13 +12,11 @@
 
 # 如何写kfc_config
 
-创建三个数组，一个叫做base，用作基底
 一个叫做info，为info的文件名
 一个叫做config，为配置文件的文件名
 示例
 ```json
 {
-    "base": [14, 25, 45, 58, 2934],
     "info": "氷織Ａ_info.txt",
     "config": "氷織Ａ_0.txt"
 }

@@ -1,9 +1,14 @@
+#include "opencv2/core/base.hpp"
 #include <cstdio>
 #include <iostream>
 #include <fstream>
 #include <json/json.h>
+#include <json/value.h>
 #include <opencv2/opencv.hpp>
 #include <filesystem>
+#include <string>
+
+#define let const auto
 
 namespace fs = std::filesystem;
 
@@ -13,7 +18,7 @@ struct kif{
     std::string name;
     int width,left,height,top,layer_id,group_layer_id;
     //判断是group还是file
-    bool isfile;
+    int type;
     bool is_layer_id(int lid){
         return lid == layer_id;
     }
@@ -180,7 +185,7 @@ inline int getypos(kif base,kif face){
 inline Json::Value readJsonFromFile(const std::string &file){
 
     Json::Value root;
-    fs::path filepath = fs::path(file);
+    let filepath = fs::path(file);
     if(filepath.extension().compare(".txt") == 0){
         root = convertToJson(file);
     }
@@ -190,4 +195,140 @@ inline Json::Value readJsonFromFile(const std::string &file){
     
     return root;
 
+}
+
+//保存到img中
+inline std::vector<kif> parseKIF(const Json::Value root){
+    std::vector<kif> img;
+    int faceid = 0;
+    for(int i = 1; i < root.size(); i++){
+        
+        kif temp;
+        temp.name = root[i]["name"].asString();
+        temp.left = root[i]["left"].asInt();
+        temp.top = root[i]["top"].asInt();
+        temp.layer_id = root[i]["layer_id"].asInt();
+        
+        //判断group_layer_id是否存在
+        if(root[i].isMember("group_layer_id")){
+            temp.type = 0;
+            temp.group_layer_id = root[i]["group_layer_id"].asInt();
+            if(temp.group_layer_id == faceid) temp.type = 2;
+        }
+        else temp.type = 1;
+
+        if(temp.name == "表情"){
+            faceid = temp.layer_id;
+            continue ;
+        }
+
+        //将temp添加到vector里面
+        img.push_back(temp);
+
+        //std::cout << temp.name << " " << temp.left << " " << temp.top << " " << temp.layer_id << " " << temp.type;
+        //std::cout << std::endl;
+    }
+    return img;
+}
+
+inline std::vector<kif> sortImg(const std::vector<kif>& img,const int& type){
+    std::vector<kif> item;
+    for(int i = 0; i < img.size(); i++){
+        if(img[i].type == type) item.push_back(img[i]);
+    }
+    return item;
+}
+
+inline int getImgItenId(const std::vector<kif>& img,const int& type,const std::string& name){
+    std::vector<kif> item = sortImg(img,type);
+    for (int i = 0; i < item.size(); i++){
+        if(item[i].name == name) return item[i].layer_id;
+    }
+    return -1;
+}
+
+inline std::vector<kif> sortImgById(const std::vector<kif>& img,const int& id,const std::string& perfix){
+    std::vector<kif> item;
+    for(int i = 0; i < img.size(); i++){
+        if(img[i].group_layer_id == id) {
+            kif temp = img[i];
+            temp.name = perfix + img[i].name;
+            item.push_back(temp);
+        }
+    }
+    return item;
+}
+
+inline kif getItem(const std::vector<kif>& item,const std::string name){
+    kif temp;
+    bool found = false;
+    for(int i = 0; i < item.size(); i++){
+        if(item[i].name == name) {
+            temp = item[i];
+            found = true;
+            break; 
+        }
+    }
+    if(!found) {
+        std::cerr << "Warning: Item '" << name << "' not found" << std::endl;
+    }
+    return temp;
+}
+
+inline std::vector<kif> sortImgForBase(const std::vector<kif>& img){
+    std::vector<kif> item;
+    for(int i = 0; i < img.size(); i++){
+        kif temp = img[i];
+        int id = img[i].layer_id;
+        if(img[i].type == 1) {
+            for(int j = 0; j < img.size(); j++){
+                if(img[j].group_layer_id == id){
+                    temp.top = img[j].top;
+                    temp.left = img[j].left;
+                    temp.width = img[j].width;
+                    temp.height = img[j].height;
+                    temp.layer_id = img[j].layer_id;
+                    item.push_back(temp);
+                    break;
+                }
+            }
+        }
+    }
+    return item;
+}
+
+inline std::string getPath(const std::string& perfix,const kif& item){
+    return perfix + "_" + std::to_string(item.layer_id)+ ".png";
+}
+
+inline void work(const kif& base,const kif& eye,const kif& eyebrow,const kif& mouth,const kif& cheek,const std::string name,const std::string perfix){
+    let basepath = getPath(perfix, base);
+    let eyepath = getPath(perfix, eye);
+    let eyebrowpath = getPath(perfix, eyebrow);
+    let mouthpath = getPath(perfix, mouth);
+    let cheekpath = getPath(perfix, cheek);
+    let eyex = getxpos(base, eye);
+    let eyey = getypos(base, eye);
+    let eyebrowx = getxpos(base, eyebrow);
+    let eyebrowy = getypos(base, eyebrow);
+    let mouthx = getxpos(base, mouth);
+    let mouthy = getypos(base, mouth);
+    let cheekx = getxpos(base, cheek);
+    let cheeky = getypos(base, cheek);
+
+    let baseimg = cv::imread(basepath, cv::IMREAD_UNCHANGED);
+    let eyeimg = cv::imread(eyepath, cv::IMREAD_UNCHANGED);
+    let eyebrowimg = cv::imread(eyebrowpath, cv::IMREAD_UNCHANGED);
+    let mouthimg = cv::imread(mouthpath, cv::IMREAD_UNCHANGED);
+    let cheekimg = cv::imread(cheekpath, cv::IMREAD_UNCHANGED);
+
+    auto output = baseimg.clone();
+
+    overlayImages(baseimg, eyeimg,output, eyex, eyey);
+    overlayImages(output, eyebrowimg,output, eyebrowx, eyebrowy);
+    overlayImages(output, mouthimg,output, mouthx, mouthy);
+    overlayImages(output, cheekimg,output, cheekx, cheeky);
+
+    fs::path outputpath = fs::path("output") / fs::path(perfix + "_" + name + "_"+ base.name + ".png");
+    cv::imwrite(outputpath.string(), output);
 }

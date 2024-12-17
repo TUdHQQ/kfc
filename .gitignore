@@ -32,7 +32,8 @@
 *.app
 
 build
+output
 .vscode
 
 txt2json
-fg
+kfc
