@@ -19,6 +19,14 @@ struct kif{
     }
 };
 
+//用来存储info.txt的数据
+struct FaceAlias {
+    std::string name;      // 表情名称
+    std::string eyebrow;   // 眉毛
+    std::string eye;       // 眼睛
+    std::string mouth;     // 嘴巴
+    std::string cheek;     // 脸颊
+};
 
 //来源: listder.h
 inline void overlayImages(const cv::Mat &background, const cv::Mat &foreground, cv::Mat &output, int x, int y) {
@@ -56,7 +64,7 @@ inline void overlayImages(const cv::Mat &background, const cv::Mat &foreground, 
     }
 }
 
-//用于将txt格式转换为json
+//分割字符串
 inline std::vector<std::string> split(const std::string& str, char delim) {
     std::vector<std::string> tokens;
     std::stringstream ss(str);
@@ -66,6 +74,8 @@ inline std::vector<std::string> split(const std::string& str, char delim) {
     }
     return tokens;
 }
+
+//用于将txt格式转换为json
 inline Json::Value convertToJson(const std::string& filename) {
     std::ifstream file(filename);
     std::string line;
@@ -112,6 +122,29 @@ inline Json::Value convertToJson(const std::string& filename) {
     return root;
 }
 
+//从info中读取数据
+inline std::vector<FaceAlias> parseFgAlias(const std::string& filename) {
+    std::vector<FaceAlias> aliases;
+    std::ifstream file(filename);
+    std::string line;
+    
+    while (std::getline(file, line)) {
+        if (line.find("fgalias") == 0) {
+            auto tokens = split(line,'\t');
+            if (tokens.size() >= 6) {
+                FaceAlias alias {
+                    tokens[1],  // 表情名称
+                    tokens[2],  // 眉毛
+                    tokens[3],  // 眼睛
+                    tokens[4],  // 嘴巴
+                    tokens[5]   // 脸颊
+                };
+                aliases.push_back(alias);
+            }
+        }
+    }
+    return aliases;
+}
 
 //用来读取json文件
 inline Json::Value readJson(const std::string &file) {
