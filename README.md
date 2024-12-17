@@ -28,3 +28,7 @@
 ```shell
 g++ kfc.cpp -o kfc $(pkg-config --cflags --libs opencv jsoncpp)
 ```
+
+# 特别注意
+
+请确保所有文件的编码为utf-8,并且换行为LF！！！
