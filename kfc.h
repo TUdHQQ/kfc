@@ -128,7 +128,7 @@ inline Json::Value readJson(const std::string &file) {
 }
 
 //用来查找 layer_id
-inline int findkif(std::vector<kif> img, int find_layer_id){
+inline int findkif(std::vector<kif> &img, int find_layer_id){
     for(int i = 0; i < img.size(); i++){
         if(img[i].is_layer_id(find_layer_id)) return i;
     }
