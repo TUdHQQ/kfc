@@ -19,10 +19,10 @@ int main(int argc, char *argv[]){
 
     //创建base，eye，eyebrow，mouth，cheek
     let base = sortImgForBase(img);
-    let eye_id = getImgItenId(img, 2, "目");
-    let eyebrow_id = getImgItenId(img, 2, "眉");
-    let mouth_id = getImgItenId(img, 2, "口");
-    let cheek_id = getImgItenId(img, 2, "頬");
+    let eye_id = getImgItemId(img, 2, "目");
+    let eyebrow_id = getImgItemId(img, 2, "眉");
+    let mouth_id = getImgItemId(img, 2, "口");
+    let cheek_id = getImgItemId(img, 2, "頬");
     let eye = sortImgById(img, eye_id,"目_");
     let eyebrow = sortImgById(img, eyebrow_id,"眉_");
     let mouth = sortImgById(img, mouth_id,"口_");
