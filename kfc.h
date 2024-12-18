@@ -9,6 +9,7 @@
 #include <string>
 
 #define let const auto
+#define fn inline const auto 
 
 namespace fs = std::filesystem;
 
@@ -19,7 +20,7 @@ struct kif{
     int width,left,height,top,layer_id,group_layer_id;
     //判断是group还是file
     int type;
-    bool is_layer_id(int lid){
+    fn is_layer_id(int lid){
         return lid == layer_id;
     }
 };
@@ -34,7 +35,7 @@ struct FaceAlias {
 };
 
 //来源: listder.h
-inline void overlayImages(const cv::Mat &background, const cv::Mat &foreground, cv::Mat &output, int x, int y) {
+fn overlayImages(const cv::Mat &background, const cv::Mat &foreground, cv::Mat &output, int x, int y) {
     cv::Rect roi(x, y, std::min(foreground.cols, background.cols - x), 
     std::min(foreground.rows, background.rows - y));
     
@@ -70,7 +71,7 @@ inline void overlayImages(const cv::Mat &background, const cv::Mat &foreground, 
 }
 
 //分割字符串
-inline std::vector<std::string> split(const std::string& str, char delim) {
+fn split(const std::string& str, char delim) {
     std::vector<std::string> tokens;
     std::stringstream ss(str);
     std::string token;
@@ -81,7 +82,7 @@ inline std::vector<std::string> split(const std::string& str, char delim) {
 }
 
 //用于将txt格式转换为json
-inline Json::Value convertToJson(const std::string& filename) {
+fn convertToJson(const std::string& filename) {
     std::ifstream file(filename);
     std::string line;
     Json::Value root(Json::arrayValue);
@@ -128,7 +129,7 @@ inline Json::Value convertToJson(const std::string& filename) {
 }
 
 //从info中读取数据
-inline std::vector<FaceAlias> parseFgAlias(const std::string& filename) {
+fn parseFgAlias(const std::string& filename) {
     std::vector<FaceAlias> aliases;
     std::ifstream file(filename);
     std::string line;
@@ -152,7 +153,7 @@ inline std::vector<FaceAlias> parseFgAlias(const std::string& filename) {
 }
 
 //用来读取json文件
-inline Json::Value readJson(const std::string &file) {
+fn readJson(const std::string &file) {
     std::ifstream jsonfile(file, std::ifstream::binary);
     Json::Value root;
     Json::CharReaderBuilder readerBuilder;
@@ -166,7 +167,7 @@ inline Json::Value readJson(const std::string &file) {
 }
 
 //用来查找 layer_id
-inline int findkif(std::vector<kif> &img, int find_layer_id){
+fn findkif(std::vector<kif> &img, int find_layer_id){
     for(int i = 0; i < img.size(); i++){
         if(img[i].is_layer_id(find_layer_id)) return i;
     }
@@ -174,15 +175,15 @@ inline int findkif(std::vector<kif> &img, int find_layer_id){
 }
 
 //用来确定x和y
-inline int getxpos(kif base,kif face){
+fn getxpos(kif base,kif face){
     return abs(base.left - face.left);
 }
-inline int getypos(kif base,kif face){
+fn getypos(kif base,kif face){
     return abs(base.top - face.top);
 }
 
 //读取配置文件
-inline Json::Value readJsonFromFile(const std::string &file){
+fn readJsonFromFile(const std::string &file){
 
     Json::Value root;
     let filepath = fs::path(file);
@@ -198,7 +199,7 @@ inline Json::Value readJsonFromFile(const std::string &file){
 }
 
 //保存到img中
-inline std::vector<kif> parseKIF(const Json::Value root){
+fn parseKIF(const Json::Value root){
     std::vector<kif> img;
     int faceid = 0;
     for(int i = 1; i < root.size(); i++){
@@ -231,7 +232,7 @@ inline std::vector<kif> parseKIF(const Json::Value root){
     return img;
 }
 
-inline std::vector<kif> sortImg(const std::vector<kif>& img,const int& type){
+fn sortImg(const std::vector<kif>& img,const int& type){
     std::vector<kif> item;
     for(int i = 0; i < img.size(); i++){
         if(img[i].type == type) item.push_back(img[i]);
@@ -239,7 +240,7 @@ inline std::vector<kif> sortImg(const std::vector<kif>& img,const int& type){
     return item;
 }
 
-inline int getImgItemId(const std::vector<kif>& img,const int& type,const std::string& name){
+fn getImgItemId(const std::vector<kif>& img,const int& type,const std::string& name){
     std::vector<kif> item = sortImg(img,type);
     for (int i = 0; i < item.size(); i++){
         if(item[i].name == name) return item[i].layer_id;
@@ -247,7 +248,7 @@ inline int getImgItemId(const std::vector<kif>& img,const int& type,const std::s
     return -1;
 }
 
-inline std::vector<kif> sortImgById(const std::vector<kif>& img,const int& id,const std::string& perfix){
+fn sortImgById(const std::vector<kif>& img,const int& id,const std::string& perfix){
     std::vector<kif> item;
     for(int i = 0; i < img.size(); i++){
         if(img[i].group_layer_id == id) {
@@ -259,19 +260,19 @@ inline std::vector<kif> sortImgById(const std::vector<kif>& img,const int& id,co
     return item;
 }
 
-inline kif getItem(const std::vector<kif>& item,const std::string name){
+fn getItem(const std::vector<kif>& item,const std::string name){
     kif temp;
-    const std::string cmp = name;
+    let cmp = name; //todo: 增加'\r‘的特殊处理
     for(int i = 0; i < item.size(); i++){
         if(item[i].name == cmp) temp = item[i];
     }
     return temp;
 }
 
-inline std::vector<kif> sortImgForBase(const std::vector<kif>& img){
+fn sortImgForBase(const std::vector<kif>& img){
     std::vector<kif> item;
     for(int i = 0; i < img.size(); i++){
-        kif temp = img[i];
+        auto temp = img[i];
         int id = img[i].layer_id;
         if(img[i].type == 1) {
             for(int j = 0; j < img.size(); j++){
@@ -290,11 +291,11 @@ inline std::vector<kif> sortImgForBase(const std::vector<kif>& img){
     return item;
 }
 
-inline std::string getPath(const std::string& perfix,const kif& item){
+fn getPath(const std::string& perfix,const kif& item){
     return perfix + "_" + std::to_string(item.layer_id)+ ".png";
 }
 
-inline void work(const kif& base,const kif& eye,const kif& eyebrow,const kif& mouth,const kif& cheek,const std::string name,const std::string perfix){
+fn work(const kif& base,const kif& eye,const kif& eyebrow,const kif& mouth,const kif& cheek,const std::string name,const std::string perfix){
     let basepath = getPath(perfix, base);
     let eyepath = getPath(perfix, eye);
     let eyebrowpath = getPath(perfix, eyebrow);
@@ -322,7 +323,7 @@ inline void work(const kif& base,const kif& eye,const kif& eyebrow,const kif& mo
     overlayImages(output, mouthimg,output, mouthx, mouthy);
     overlayImages(output, cheekimg,output, cheekx, cheeky);
 
-    fs::path outputpath = fs::path("output") / fs::path(perfix + "_" + name + "_"+ base.name + ".png");
+    let outputpath = fs::path("output") / fs::path(perfix + "_" + name + "_"+ base.name + ".png");
     cv::imwrite(outputpath.string(), output);
     std::cout<<"saving..... "<<outputpath<<std::endl;
 }

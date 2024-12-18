@@ -8,11 +8,6 @@ int main(int argc, char *argv[]){
     let infoFile = cfroot["info"].asString();
     let root = readJsonFromFile(configFile);
     let aliases = parseFgAlias(infoFile);
-    
-    //读取第一个对象里面的 width 和 height
-    //int krkr_width = root[0]["width"].asInt();
-    //int krkr_height = root[0]["height"].asInt();
-    //没啥用，删掉了
 
     //创建一个kif类型的vector用来存储后面的对象
     let img = parseKIF(root);
