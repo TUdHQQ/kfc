@@ -239,7 +239,7 @@ inline std::vector<kif> sortImg(const std::vector<kif>& img,const int& type){
     return item;
 }
 
-inline int getImgItenId(const std::vector<kif>& img,const int& type,const std::string& name){
+inline int getImgItemId(const std::vector<kif>& img,const int& type,const std::string& name){
     std::vector<kif> item = sortImg(img,type);
     for (int i = 0; i < item.size(); i++){
         if(item[i].name == name) return item[i].layer_id;
