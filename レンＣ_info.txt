@@ -1,0 +1,39 @@
+#レンＣ（後ろ向き）				
+#dress	服装名	種別	差分名	レイヤ名
+dress	喫茶店服	base	dummy	
+dress	喫茶店服	diff	後ろ向き	喫茶店服/後ろ向き
+
+dress	私服	base	dummy	
+dress	私服	diff	後ろ向き	私服１/後ろ向き
+
+dress	私服２	base	dummy	
+dress	私服２	diff	後ろ向き	私服２/後ろ向き
+
+dress	パジャマ	base	dummy	
+dress	パジャマ	diff	後ろ向き	パジャマ/後ろ向き
+
+dress	裸	base	dummy	
+dress	裸	diff	後ろ向き	裸/後ろ向き
+
+
+# 以下、後ろ向き用ダミー表情				
+# 表情グループの指定（眉は目の一部として処理）				
+#facegroup	表情名先頭部			
+facegroup	髪_			
+facegroup	眉_			
+facegroup	目_			
+facegroup	口_			
+facegroup	頬_			
+
+# 表情グループ定義名				
+#fgname	表情名	レイヤ名	フラグ	
+fgname	髪_通常	dummy		
+fgname	眉_通常	dummy		
+fgname	目_通常	dummy		
+fgname	口_通常	dummy		
+fgname	頬_通常	dummy		
+
+# 表情グループ別名定義(スクリプト中ではこちらの表情名を指定)				
+#fgalias	表情名	目	口	頬
+fgalias	通常	目_通常	口_通常	頬_通常
+

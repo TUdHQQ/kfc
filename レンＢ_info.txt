@@ -1,0 +1,130 @@
+#レンＢ（斜め）				
+#dress	服装名	種別	差分名	レイヤ名
+dress	喫茶店服	base	dummy	
+dress	喫茶店服	diff	斜め２	喫茶店服/斜め２
+dress	喫茶店服	diff	斜め１	喫茶店服/斜め１
+dress	喫茶店服	diff	斜め	喫茶店服/斜め１
+
+dress	私服	base	dummy	
+dress	私服	diff	斜め２	私服１/斜め２
+dress	私服	diff	斜め１	私服１/斜め１
+dress	私服	diff	斜め	私服１/斜め１
+
+dress	私服２	base	dummy	
+dress	私服２	diff	斜め２	私服２/斜め２
+dress	私服２	diff	斜め１	私服２/斜め１
+dress	私服２	diff	斜め	私服２/斜め１
+
+dress	パジャマ	base	dummy	
+dress	パジャマ	diff	斜め２	パジャマ/斜め２
+dress	パジャマ	diff	斜め１	パジャマ/斜め１
+dress	パジャマ	diff	斜め	パジャマ/斜め１
+
+dress	裸	base	dummy	
+dress	裸	diff	斜め２	裸/斜め２
+dress	裸	diff	斜め１	裸/斜め１
+dress	裸	diff	斜め	裸/斜め１
+
+
+# 表情グループの指定
+#facegroup	表情名先頭部			
+facegroup	眉_			
+facegroup	目_			
+facegroup	口_			
+facegroup	汗_			
+facegroup	頬_			
+
+
+# 表情グループ定義名				
+#fgname	表情名	レイヤ名	フラグ	
+fgname	眉_笑１	表情/眉/笑１
+fgname	眉_笑２	表情/眉/笑２
+fgname	眉_怒１	表情/眉/怒１
+fgname	眉_怒２	表情/眉/怒２
+fgname	眉_悲１	表情/眉/悲１
+fgname	眉_悲２	表情/眉/悲２
+fgname	眉_泣１	表情/眉/泣１
+fgname	眉_泣２	表情/眉/泣２
+fgname	眉_驚１	表情/眉/驚１
+fgname	眉_驚２	表情/眉/驚２
+fgname	眉_照１	表情/眉/照１
+fgname	眉_照２	表情/眉/照２
+fgname	眉_追真剣	表情/眉/追真剣
+fgname	眉_えっへん	表情/眉/えっへん
+fgname	眉_ギャグ笑	表情/眉/ギャグ笑
+fgname	眉_ギャグ怒	表情/眉/ギャグ怒
+fgname	眉_ギャグ驚	表情/眉/ギャグ驚
+fgname	眉_ギャグ泣	表情/眉/ギャグ泣
+
+fgname	目_笑１	表情/目/笑１
+fgname	目_笑２	表情/目/笑２
+fgname	目_怒１	表情/目/怒１
+fgname	目_怒２	表情/目/怒２
+fgname	目_悲１	表情/目/悲１
+fgname	目_悲２	表情/目/悲２
+fgname	目_泣１	表情/目/泣１
+fgname	目_泣２	表情/目/泣２
+fgname	目_驚１	表情/目/驚１
+fgname	目_驚２	表情/目/驚２
+fgname	目_照１	表情/目/照１
+fgname	目_照２	表情/目/照２
+fgname	目_追真剣	表情/目/追真剣
+fgname	目_えっへん	表情/目/えっへん
+fgname	目_ギャグ笑	表情/目/ギャグ笑
+fgname	目_ギャグ怒	表情/目/ギャグ怒
+fgname	目_ギャグ驚	表情/目/ギャグ驚
+fgname	目_ギャグ泣	表情/目/ギャグ泣
+
+fgname	口_笑１	表情/口/笑１
+fgname	口_笑２	表情/口/笑２
+fgname	口_怒１	表情/口/怒１
+fgname	口_怒２	表情/口/怒２
+fgname	口_悲１	表情/口/悲１
+fgname	口_悲２	表情/口/悲２
+fgname	口_泣１	表情/口/泣１
+fgname	口_泣２	表情/口/泣２
+fgname	口_驚１	表情/口/驚１
+fgname	口_驚２	表情/口/驚２
+fgname	口_照１	表情/口/照１
+fgname	口_照２	表情/口/照２
+fgname	口_追真剣	表情/口/追真剣
+fgname	口_追閉じ	表情/口/追閉じ
+fgname	口_追開け	表情/口/追開け
+fgname	口_えっへん	表情/口/えっへん
+fgname	口_ギャグ笑	表情/口/ギャグ笑
+fgname	口_ギャグ怒	表情/口/ギャグ怒
+fgname	口_ギャグ驚	表情/口/ギャグ驚
+fgname	口_ギャグ泣	表情/口/ギャグ泣
+
+fgname	汗_無
+fgname	汗_汗１	表情/汗/汗
+fgname	汗_汗２	表情/汗/汗
+
+fgname	頬_頬１	頬/頬１
+fgname	頬_頬２	頬/頬２
+fgname	頬_頬３	頬/頬３
+fgname	頬_頬４	頬/頬４
+fgname	頬_頬５	頬/頬５
+fgname	頬_Ｇ頬	頬/G頬
+
+
+# 表情グループ別名定義(スクリプト中ではこちらの表情名を指定)				
+#fgalias	表情名	髪	眉	目	口	汗	頬
+fgalias	笑１	眉_笑１	目_笑１	口_笑１	汗_無	頬_頬１
+fgalias	笑２	眉_笑２	目_笑２	口_笑２	汗_無	頬_頬１
+fgalias	怒１	眉_怒１	目_怒１	口_怒１	汗_無	頬_頬１
+fgalias	怒２	眉_怒２	目_怒２	口_怒２	汗_無	頬_頬１
+fgalias	悲１	眉_悲１	目_悲１	口_悲１	汗_無	頬_頬１
+fgalias	悲２	眉_悲２	目_悲２	口_悲２	汗_無	頬_頬１
+fgalias	泣１	眉_泣１	目_泣１	口_泣１	汗_無	頬_頬１
+fgalias	泣２	眉_泣２	目_泣２	口_泣２	汗_無	頬_頬１
+fgalias	驚１	眉_驚１	目_驚１	口_驚１	汗_無	頬_頬１
+fgalias	驚２	眉_驚２	目_驚２	口_驚２	汗_無	頬_頬１
+fgalias	照１	眉_照１	目_照１	口_照１	汗_無	頬_頬１
+fgalias	照２	眉_照２	目_照２	口_照２	汗_無	頬_頬１
+fgalias	真剣	眉_追真剣	目_追真剣	口_追真剣	汗_無	頬_頬１
+fgalias	えっへん	眉_えっへん	目_えっへん	口_えっへん	汗_無	頬_頬１
+fgalias	ギャグ笑	眉_ギャグ笑	目_ギャグ笑	口_ギャグ笑	汗_無	頬_頬１
+fgalias	ギャグ怒	眉_ギャグ怒	目_ギャグ怒	口_ギャグ怒	汗_無	頬_頬１
+fgalias	ギャグ驚	眉_ギャグ驚	目_ギャグ驚	口_ギャグ驚	汗_汗１	頬_頬１
+fgalias	ギャグ泣	眉_ギャグ泣	目_ギャグ泣	口_ギャグ泣	汗_無	頬_頬１

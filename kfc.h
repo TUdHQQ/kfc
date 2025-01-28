@@ -92,8 +92,8 @@ fn convertToJson(const std::string& filename) {
     std::getline(file, line);
     std::vector<std::string> size = split(line, '\t');
     Json::Value canvas;
-    canvas["width"] = 3000;
-    canvas["height"] = 5000;
+    canvas["width"] = 3660;
+    canvas["height"] = 6000;
     root.append(canvas);
 
     while (std::getline(file, line)) {
