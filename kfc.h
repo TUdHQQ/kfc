@@ -6,7 +6,6 @@
 #include <json/value.h>
 #include <opencv2/opencv.hpp>
 #include <filesystem>
-#include <string>
 
 #define let const auto
 #define fn inline const auto 
@@ -31,6 +30,7 @@ struct FaceAlias {
     std::string eyebrow;   // 眉毛
     std::string eye;       // 眼睛
     std::string mouth;     // 嘴巴
+    std::string useless;
     std::string cheek;     // 脸颊
 };
 
@@ -137,13 +137,14 @@ fn parseFgAlias(const std::string& filename) {
     while (std::getline(file, line)) {
         if (line.find("fgalias") == 0) {
             auto tokens = split(line,'\t');
-            if (tokens.size() >= 6) {
+            if (tokens.size() >= 7) {
                 FaceAlias alias {
                     tokens[1],  // 表情名称
                     tokens[2],  // 眉毛
                     tokens[3],  // 眼睛
                     tokens[4],  // 嘴巴
-                    tokens[5]   // 脸颊
+                    tokens[5],  // 未知
+                    tokens[6]   // 脸颊
                 };
                 aliases.push_back(alias);
             }
@@ -222,12 +223,16 @@ fn parseKIF(const Json::Value root){
             faceid = temp.layer_id;
             continue ;
         }
+        if(temp.name == "頬"){
+            temp.type = 2;
+            temp.group_layer_id = faceid;
+        }
 
         //将temp添加到vector里面
         img.push_back(temp);
 
-        //std::cout << temp.name << " " << temp.left << " " << temp.top << " " << temp.layer_id << " " << temp.type;
-        //std::cout << std::endl;
+        std::cout << temp.name << " " << temp.left << " " << temp.top << " " << temp.layer_id << " " << temp.type;
+        std::cout << std::endl;
     }
     return img;
 }
