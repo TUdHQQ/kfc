@@ -1,0 +1,90 @@
+dress	d1	diff	p1	基本/h1
+dress	d1	diff	p2	基本/h2
+dress	d2	diff	p1	ロケットなし/h1
+dress	d2	diff	p2	ロケットなし/h2
+dress	d3	diff	p1	水着/h1
+dress	d3	diff	p2	水着/h2
+
+facegroup	op
+facegroup	眉
+facegroup	目
+facegroup	口
+facegroup	頬
+
+fgname	op0	dummy
+fgname	op1	op1
+fgname	op2	op2
+fgname	眉1	眉/眉1
+fgname	眉2	眉/眉2
+fgname	眉3	眉/眉3
+fgname	眉4	眉/眉4
+fgname	眉5	眉/眉5
+fgname	眉6	眉/眉6
+fgname	眉7	眉/眉7
+fgname	眉8	眉/眉8
+fgname	眉9	眉/眉9
+fgname	眉a	眉/眉a
+fgname	眉b	眉/眉b
+fgname	眉c	眉/眉c
+fgname	眉d	眉/眉d
+fgname	眉e	眉/眉e
+fgname	眉f	眉/眉f
+fgname	眉g	眉/眉g
+fgname	眉h	眉/眉h
+fgname	目1	目/目1
+fgname	目2	目/目2
+fgname	目3	目/目3
+fgname	目4	目/目4
+fgname	目5	目/目5
+fgname	目6	目/目6
+fgname	目7	目/目7
+fgname	目8	目/目8
+fgname	目9	目/目9
+fgname	目a	目/目a
+fgname	目b	目/目b
+fgname	目c	目/目c
+fgname	目d	目/目d
+fgname	目e	目/目e
+fgname	目f	目/目f
+fgname	目g	目/目g
+fgname	目h	目/目h
+fgname	口1	口/口1
+fgname	口2	口/口2
+fgname	口3	口/口3
+fgname	口4	口/口4
+fgname	口5	口/口5
+fgname	口6	口/口6
+fgname	口7	口/口7
+fgname	口8	口/口8
+fgname	口9	口/口9
+fgname	口a	口/口a
+fgname	口b	口/口b
+fgname	口c	口/口c
+fgname	口d	口/口d
+fgname	口e	口/口e
+fgname	口f	口/口f
+fgname	口g	口/口g
+fgname	口h	口/口h
+fgname	頬0	dummy
+fgname	頬1	頬/頬1
+fgname	頬2	頬/頬2
+fgname	頬3	頬/頬3
+
+
+fgalias	f1	眉1	目1	口1	頬0	op0
+fgalias	f2	眉2	目2	口2	頬0	op0
+fgalias	f3	眉3	目3	口3	頬0	op0
+fgalias	f4	眉4	目4	口4	頬0	op0
+fgalias	f5	眉5	目5	口5	頬0	op0
+fgalias	f6	眉6	目6	口6	頬0	op0
+fgalias	f7	眉7	目7	口7	頬0	op0
+fgalias	f8	眉8	目8	口8	頬0	op0
+fgalias	f9	眉9	目9	口9	頬0	op0
+fgalias	fa	眉a	目a	口a	頬0	op0
+fgalias	fb	眉b	目b	口b	頬0	op0
+fgalias	fc	眉c	目c	口c	頬0	op0
+fgalias	fd	眉d	目d	口d	頬0	op0
+fgalias	fe	眉e	目e	口e	頬0	op0
+fgalias	ff	眉f	目f	口f	頬0	op0
+fgalias	fg	眉g	目g	口g	頬0	op0
+fgalias	fh	眉h	目h	口h	頬0	op0

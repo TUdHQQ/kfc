@@ -1,5 +1,5 @@
 {
-    "info": "氷織Ａ_info.txt",
-    "config": "氷織Ａ_0.txt"
+	"sinfo": "tkan01.sinfo",
+	"config": "tkan01_ll.pbd.json",
+	"base": "tkan01_ll_"
 }
-
