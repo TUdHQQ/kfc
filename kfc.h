@@ -160,14 +160,14 @@ fn readData(std::string file) {
          item["layer_type"].asInt() == 2 ? 0 : 1});
   }
   for (int i = 0; i < img.size(); i++) {
-    std::string perfix = "";
+    std::string prefix = "";
     if (img[i].is_group())
       data[img[i].name] = img[i];
     for (int j = i + 1; j < img.size(); j++)
       if (img[i].group_layer_id == img[j].layer_id)
-        perfix = img[j].name + '/';
-    data[perfix + img[i].name] = img[i];
-    data[perfix + img[i].name].name = perfix + img[i].name;
+        prefix = img[j].name + '/';
+    data[prefix + img[i].name] = img[i];
+    data[prefix + img[i].name].name = prefix + img[i].name;
   }
   return data;
 }
@@ -178,19 +178,19 @@ fn getxpos(kif base, kif face) { return abs(base.left - face.left); }
 
 fn getypos(kif base, kif face) { return abs(base.top - face.top); }
 
-fn getPath(const std::string &perfix, int &id) {
-  return fs::current_path() / (perfix + std::to_string(id) + ".png");
+fn getPath(const std::string &prefix, int &id) {
+  return fs::current_path() / (prefix + std::to_string(id) + ".png");
 }
 
-fn work(const fs::path &outpath, const std::string &perfix, diff &d,
+fn work(const fs::path &outpath, const std::string &prefix, diff &d,
         fgalias &fg) {
   let baseimg =
-      cv::imread(getPath(perfix, d.info.layer_id), cv::IMREAD_UNCHANGED);
+      cv::imread(getPath(prefix, d.info.layer_id), cv::IMREAD_UNCHANGED);
   auto output = baseimg.clone();
   for (auto &fgname : *fg.list)
     overlayImages(
         output,
-        cv::imread(getPath(perfix, fgname.info.layer_id), cv::IMREAD_UNCHANGED),
+        cv::imread(getPath(prefix, fgname.info.layer_id), cv::IMREAD_UNCHANGED),
         output, getxpos(d.info, fgname.info), getypos(d.info, fgname.info));
   if (outpath.parent_path() != fs::current_path())
     fs::create_directories(outpath.parent_path());
